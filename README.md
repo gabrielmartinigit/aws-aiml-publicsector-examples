@@ -11,5 +11,9 @@ _Pré requisito:_
 ## Limpando o ambiente
 1. ...
 
+## Referências
+* https://github.com/awslabs/amazon-sagemaker-examples
+* https://github.com/awslabs/amazon-sagemaker-mlops-workshop
+
 ## License summary
 This sample code is made available under the MIT-0 license. See the LICENSE file.

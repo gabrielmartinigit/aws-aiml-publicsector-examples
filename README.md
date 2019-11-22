@@ -1,0 +1,15 @@
+# AWS SageMaker Public Sector Examples
+Alguns exemplos de notebooks relacionados ao setor público.
+
+_Pré requisito:_
+1. Execute o template do CloudFormation para a criação das permissões que nosso notebook irá conter
+
+## Excutando os notebooks
+1. ...
+
+
+## Limpando o ambiente
+1. ...
+
+## License summary
+This sample code is made available under the MIT-0 license. See the LICENSE file.

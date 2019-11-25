@@ -16,7 +16,7 @@ _Nota: Testado na região us-east-1 (N.Virginia)_
 
 ## Criando instância notebook no SageMaker
 1. Crie um novo notebook em https://console.aws.amazon.com/sagemaker/
-2. Em **instance_type** selecione o tamanho de máquina (Neste exemplo, iremos utilizar a instância p3.2xlarge - você pode visualizar as especificações aqui https://aws.amazon.com/ec2/instance-types/)
+2. Em **instance_type** selecione o tamanho de máquina (Neste exemplo, iremos utilizar a instância c5.xlarge - você pode visualizar as especificações aqui https://aws.amazon.com/ec2/instance-types/)
 3. Em **IAM Role**, selecione a Role já criada (AmazonSageMaker...)
 4. Por fim, selecione **Create**
 

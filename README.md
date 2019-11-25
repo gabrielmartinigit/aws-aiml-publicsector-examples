@@ -45,6 +45,7 @@ _Nota: Testado na região us-east-1 (N.Virginia)_
 * https://github.com/awslabs/amazon-sagemaker-mlops-workshop
 * https://aws.amazon.com/blogs/machine-learning/deploy-trained-keras-or-tensorflow-models-using-amazon-sagemaker/
 * https://course.fast.ai/start_sagemaker.html
+* https://aws.amazon.com/blogs/machine-learning/building-training-and-deploying-fastai-models-with-amazon-sagemaker/
 
 ## License summary
 This sample code is made available under the MIT-0 license. See the LICENSE file.

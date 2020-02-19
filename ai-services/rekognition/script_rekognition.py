@@ -10,13 +10,14 @@ Finalizando o seu teste, basta utilizar a função de stop do script.
 import boto3
 
 REKOGNITION_CLIENT = boto3.client('rekognition')
-PROJECT = "arn:aws:rekognition:us-east-1:709545988742:project/ppe-detection/1580784227457"
-PROJECT_VERSION = "arn:aws:rekognition:us-east-1:709545988742:project/ppe-detection/version/ppe-detection.2020-02-03T23.52.27/1580784754596"
-# PROJECT_VERSION = "REKOGNITION ARN"
+PROJECT = "PROJECT_ARN"
+PROJECT_VERSION = "PROJECT_VERSION_ARN"
+VERSION_NAME = "VERSION_NAME"
+
 IMAGE_TEST = {
     # 'Bytes': b'bytes', -> you can also use image base64
     'S3Object': {
-        'Bucket': 'martinig-dataset',
+        'Bucket': 'BUCKET CRIADO',
         'Name': 'yellow/10_yellow.jpg'
     }
 }
@@ -24,8 +25,8 @@ IMAGE_TEST = {
 
 def verify_rekognition_custom():
     response = REKOGNITION_CLIENT.describe_project_versions(
-        ProjectArn='arn:aws:rekognition:us-east-1:709545988742:project/ppe-detection/1580784227457',
-        VersionNames=['ppe-detection.2020-02-03T23.52.27']
+        ProjectArn=PROJECT,
+        VersionNames=[VERSION_NAME]
     )
     return response['ProjectVersionDescriptions'][0]['Status']
 
@@ -65,6 +66,7 @@ def app():
         print(label)
     else:
         # start model
+        print("Starting the model")
         start_rekognition_custom()
 
     # stop model

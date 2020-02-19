@@ -52,20 +52,35 @@ O Rekognition entrega diferentes APIs que podemos utilizar. Essas são:
 - Text in image
 - Video analysis
 
-Para testar algumas dessas APIs iremos abrir o notebook **rekognition.ipynb** (estamos utilizando um notebook apenas para faciliar a demonstração. As APIs podem ser acessadas via qualquer script, o notebook não é um requisito.)
+Para testar algumas dessas APIs iremos abrir o notebook **ai-services/rekognition/rekognition.ipynb** (estamos utilizando um notebook apenas para faciliar a demonstração. As APIs podem ser acessadas via qualquer script, o notebook não é um requisito.)
 
-_Nota: Para executar as células do notebook basta clicar em **Run**. Após isso, aguarde a célula terminar o processamento até que \* vire um número._
+_Nota: O kernel utilizado será o conda python3 e para executar as células do notebook basta clicar em **Run**. Após isso, aguarde a célula terminar o processamento até que \* vire um número._
 
 ## Utilizando Custom Labels
 
 Com o Amazon Rekognition Custom Labels, você pode identificar os objetos e as cenas nas imagens que são específicos às necessidades dos seus negócios. Por exemplo, você pode criar um modelo para classificar peças específicas da máquina em sua linha de montagem ou detectar plantas não saudáveis. O Amazon Rekognition Custom Labels cuida do trabalho pesado do desenvolvimento de modelos para você, portanto, não é necessária experiência em machine learning. Você só precisa fornecer imagens de objetos ou cenas que deseja identificar e o serviço lida com o restante.
 
-1. Importar dataset
-2. Testar Bounding Box
-3. Iniciar Treinamento
-4. Start do modelo
-5. Teste de inferência
-6. Parar o modelo
+1. Navegue para o console do Rekognition: [https://console.aws.amazon.com/rekognition/home](https://console.aws.amazon.com/rekognition/home)
+2. Vá para **Use Custom Labels** e clique em **Get Started**
+3. Clique em **Create S3 Bucket**
+4. Nomei o projeto como **aimlworkshop**
+5. Navegue para a console do S3: [https://console.aws.amazon.com/s3/home](https://console.aws.amazon.com/s3/home)
+6. Crie um bucket S3
+7. Volte para o terminal do snotebook e descompacte o dataset. Faça upload para o bucket criado:
+   ```
+   cd SageMaker/aws-aiml-publicsector-examples/ai-services/rekognition/sample-data/
+   unzip dataset.zip
+   cd dataset
+   aws s3 cp . s3://<BUCKET CRIADO>/ --recursive
+   ```
+8. Volte para a console do Rekognition e crie um dataset com o nome de **datasetworkshop** e selecione **Import images from S3 bucket**
+9. Em folder name utilize:
+   ```
+   s3://<BUCKET CRIADO>/
+   ```
+10. Selecione **Automatically attach a label to my images based on the folder they're stored in.**
+11. Agora que já temos o dataset, podemos iniciar o treinamento. Clique em **Train model**
+12. Após o treinamento finalizar (cerca de no mínimo **10 minutos**), podemos inicializar o modelo para executar nossas inferências. Para isso de uma olhada no script **ai-services/rekognition/script-rekognition.py** modifique as informações necessárias e execute no terminal do notebook.
 
 ## Referências
 

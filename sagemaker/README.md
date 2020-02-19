@@ -28,6 +28,7 @@ O Amazon SageMaker é um serviço totalmente gerenciado que fornece a todos os d
    - Feche o terminal
 
 3. Vá para **sagemaker/notebooks**
+4. Abra algum dos notebooks e execute cada célula
 
 ## License Summary
 

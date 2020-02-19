@@ -1,0 +1,9 @@
+# MAC
+.DS_Store
+
+# Python
+
+# Jupyter
+*/.ipynb_checkpoints
+
+# Env

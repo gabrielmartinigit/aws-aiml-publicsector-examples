@@ -4,6 +4,6 @@
 # Python
 
 # Jupyter
-*/.ipynb_checkpoints
+.ipynb_checkpoints
 
 # Env

@@ -4,7 +4,7 @@
 
 FROM ubuntu:16.04
 
-MAINTAINER martinig
+LABEL maintainer="martinig"
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
     wget \

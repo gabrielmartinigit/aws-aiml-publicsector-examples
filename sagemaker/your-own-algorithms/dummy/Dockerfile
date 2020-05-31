@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends software-proper
     openssh-client \
     openssh-server \
     vim \
+    wget \
+    python \
+    nginx \
     zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
 
@@ -36,8 +39,6 @@ RUN wget https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSIO
 RUN ${PIP} --no-cache-dir install --upgrade pip
 RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
-WORKDIR /
-
 # Installing numpy, pandas, scikit-learn, scipy
 RUN ${PIP} install --no-cache --upgrade \
     numpy==1.14.5 \
@@ -52,8 +53,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib" \
     PYTHONIOENCODING=UTF-8 \
     LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8
+    LC_ALL=C.UTF-8 \
+    PATH="/opt/program:${PATH}"
 
-COPY code/* /
-
-ENTRYPOINT ["python", "main.py"]
+# Set up the program in the image
+COPY dummy_algorithm /opt/program
+WORKDIR /opt/program

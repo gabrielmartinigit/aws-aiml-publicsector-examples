@@ -6,3 +6,6 @@ venv
 
 # Jupyter
 .ipynb_checkpoints
+
+# VSCode
+.vscode

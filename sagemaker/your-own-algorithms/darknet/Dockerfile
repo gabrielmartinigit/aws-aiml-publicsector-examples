@@ -1,32 +1,62 @@
-# Start FROM Nvidia PyTorch image
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 LABEL maintainer="martinig"
 
+ENV LANG C.UTF-8
+RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
+    PIP_INSTALL="python -m pip --no-cache-dir install --upgrade" && \
+    GIT_CLONE="git clone --depth 10" && \
 
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
+    rm -rf /var/lib/apt/lists/* \
+    /etc/apt/sources.list.d/cuda.list \
+    /etc/apt/sources.list.d/nvidia-ml.list && \
+
+    apt-get update && \
+
+    # ==================================================================
+    # tools
+    # ------------------------------------------------------------------
+
+    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+    build-essential \
+    apt-utils \
+    ca-certificates \
     wget \
-    make \
-    python \
     git \
-    ca-certificates && rm -rf /var/lib/apt/lists/*
+    vim \
+    libssl-dev \
+    curl \
+    unzip \
+    unrar \
+    && \
 
-# Install dependencies
-RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
-    pip install numpy==1.16.2 scipy==1.2.1 scikit-learn==0.20.2 pandas flask gevent gunicorn && \
-    ( \
-    cd /usr/local/lib/python2.7/dist-packages/scipy/.libs \
-    rm * \
-    ln ../../numpy/.libs/* . \
-    ) && rm -rf /root/.cache
+    $GIT_CLONE https://github.com/Kitware/CMake ~/cmake && \
+    cd ~/cmake && \
+    ./bootstrap && \
+    make -j"$(nproc)" install && \
 
-# Install Darknet
-COPY yolo_algorithm /opt/program
-RUN cd /opt/program
-RUN git clone https://github.com/AlexeyAB/darknet.git
-RUN cd darknet
-RUN make
-RUN wget https://pjreddie.com/media/files/darknet53.conv.74
+    # ==================================================================
+    # darknet
+    # ------------------------------------------------------------------
+
+    $GIT_CLONE https://github.com/pjreddie/darknet.git ~/darknet && \
+    cd ~/darknet && \
+    sed -i 's/GPU=0/GPU=0/g' ~/darknet/Makefile && \
+    sed -i 's/CUDNN=0/CUDNN=0/g' ~/darknet/Makefile && \
+    make -j"$(nproc)" && \
+    cp ~/darknet/include/* /usr/local/include && \
+    cp ~/darknet/*.a /usr/local/lib && \
+    cp ~/darknet/*.so /usr/local/lib && \
+    cp ~/darknet/darknet /usr/local/bin && \
+
+    # ==================================================================
+    # config & cleanup
+    # ------------------------------------------------------------------
+
+    ldconfig && \
+    apt-get clean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* ~/*
 
 # Setting some environment variables.
 ENV PYTHONUNBUFFERED=TRUE
@@ -34,4 +64,5 @@ ENV PYTHONDONTWRITEBYTECODE=TRUE
 ENV PATH="/opt/program:${PATH}"
 
 # Set up the program in the image
+COPY yolo_algorithm /opt/program
 WORKDIR /opt/program

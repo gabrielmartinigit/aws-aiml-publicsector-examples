@@ -48,13 +48,13 @@ RUN ${PIP} install --no-cache --upgrade \
     scipy==1.2.1
 
 # Setting some environment variables.
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib" \
-    PYTHONIOENCODING=UTF-8 \
-    LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8 \
-    PATH="/opt/program:${PATH}"
+ENV PYTHONDONTWRITEBYTECODE=TRUE
+ENV PYTHONUNBUFFERED=TRUE
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
+ENV PYTHONIOENCODING=UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV PATH="/opt/program:${PATH}"
 
 # Set up the program in the image
 COPY dummy_algorithm /opt/program

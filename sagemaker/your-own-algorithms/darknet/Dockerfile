@@ -1,13 +1,11 @@
 # Start FROM Nvidia PyTorch image
-FROM nvcr.io/nvidia/pytorch:20.03-py3
+FROM python:3.6-alpine
 
 LABEL maintainer="martinig"
 
 # Install dependencies
-RUN apt-get update
 COPY ./requirements.txt /opt/program/requirements.txt
-WORKDIR /opt/program
-RUN pip install -r requirements.txt
+RUN pip install -r /opt/program/requirements.txt
 
 # Setting some environment variables.
 ENV PYTHONUNBUFFERED=TRUE
@@ -16,3 +14,4 @@ ENV PATH="/opt/program:${PATH}"
 
 # Set up the program in the image
 COPY yolo_algorithm /opt/program
+WORKDIR /opt/program

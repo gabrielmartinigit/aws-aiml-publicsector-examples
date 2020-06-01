@@ -1,0 +1,6 @@
+numpy == 1.16.2
+pandas
+opencv-python >= 4.1
+darknetpy == 4.1
+scipy == 1.2.1
+scikit-learn == 0.20.2

@@ -20,6 +20,7 @@ fi
 
 echo "Iniciando o build da imagem Docker..."
 
+# Copying common files
 cp ../../utils/server/* $algorithm_folder/
 chmod +x $algorithm_folder/train
 chmod +x $algorithm_folder/serve

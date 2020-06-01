@@ -33,3 +33,7 @@ _Pré-requisitos:_
 - https://github.com/NVIDIA/nvidia-docker
 - https://pjreddie.com/darknet/train-cifar/
 - https://pypi.org/project/darknetpy/
+- https://github.com/madhawav/YOLO3-4-Py
+- https://github.com/ultralytics/yolov3
+- https://github.com/ufoym/deepo
+- https://ngc.nvidia.com/catalog/containers/?orderBy=modifiedDESC&pageNumber=5&query=&quickFilter=&filters=
